@@ -13,8 +13,8 @@ A simple proof-of-concept project demonstrating an autocomplete input field buil
   - Easily extendable to fetch results from an API
 
 **📂 Project Structure**
-   React-Autocomplete/
-
+    
+    React-Autocomplete/
     ├── src/
     │   ├── components/
     │   │   └── Autocomplete.jsx
