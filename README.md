@@ -1,48 +1,12 @@
-**React Autocomplete POC**
+# React + Vite
 
-A simple proof-of-concept project demonstrating an autocomplete input field built with React, Vite, and Tailwind CSS.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-**🚀 Features**
+Currently, two official plugins are available:
 
-  - Fast development setup with Vite
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-  - Styled with Tailwind CSS
+## Expanding the ESLint configuration
 
-  - Autocomplete suggestions based on a predefined list
-
-  - Easily extendable to fetch results from an API
-
-**📂 Project Structure**
-    
-    React-Autocomplete/
-    ├── src/
-    │   ├── components/
-    │   │   └── Autocomplete.jsx
-    │   ├── App.jsx
-    │   ├── main.jsx
-    │   └── index.css
-    ├── public/
-    ├── package.json
-    └── vite.config.js
-
-**🛠️ Installation & Setup**
-
-Clone the repository:
-
-    git clone https://github.com/Yashika-1705/React-Autocomplete.git
-    cd React-Autocomplete
-
-
-Install dependencies:
-
-    npm install
-
-
-Start development server:
-
-    npm run dev
-
-
-Open in your browser at:
-
-    http://localhost:5173/
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

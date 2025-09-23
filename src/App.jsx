@@ -7,6 +7,7 @@ import {
   Typography,
   Grid,
   Paper,
+  Divider,
 } from "@mui/material";
 
 function PurchaseRequestForm() {
@@ -14,16 +15,14 @@ function PurchaseRequestForm() {
     requesterName: "",
     department: "",
     material: "",
-    quantity: "",
-    justification: "",
+    quantity: ""
   });
 
-  // separate states for materials and departments
   const [materialOptions, setMaterialOptions] = useState([]);
   const [departmentOptions, setDepartmentOptions] = useState([]);
 
   const fetchMaterials = async (value) => {
-    if (!value) {
+    if (!value || value.length < 3) {
       setMaterialOptions([]);
       return;
     }
@@ -35,7 +34,7 @@ function PurchaseRequestForm() {
   };
 
   const fetchDepartments = async (value) => {
-    if (!value) {
+    if (!value || value.length < 3) {
       setDepartmentOptions([]);
       return;
     }
@@ -49,21 +48,55 @@ function PurchaseRequestForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    alert("Purchase request submitted ✅");
+    alert("✅ Purchase request submitted!");
+  };
+
+  const handleReset = () => {
+    setFormData({
+      requesterName: "",
+      department: "",
+      material: "",
+      quantity: ""
+    });
+    setMaterialOptions([]);
+    setDepartmentOptions([]);
   };
 
   return (
     <Paper
-      elevation={4}
-      sx={{ maxWidth: 1900, margin: "2rem auto", padding: "2rem" }}
+      elevation={5}
+      sx={{
+        maxWidth: 600,
+        margin: "2rem auto",
+        padding: "2rem",
+        borderRadius: "12px",
+      }}
     >
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom>
         Purchase Request Form
       </Typography>
 
-      <Box component="form" onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          {/* Requester Name */}
+      <Divider sx={{ mb: 3 }} />
+
+      <Box 
+        component="form" 
+        sx={{
+          width: "100%",
+          minHeight: "100vh",
+          padding: "2rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          boxSizing: "border-box",
+        }}
+        onSubmit={handleSubmit}
+      >
+        <Grid container spacing={3}>
+          {/* Section 1: Requester Info */}
+          <Grid item xs={12}>
+            <Typography variant="h6">Requester Information</Typography>
+          </Grid>
+
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -76,7 +109,6 @@ function PurchaseRequestForm() {
             />
           </Grid>
 
-          {/* Department with Autocomplete */}
           <Grid item xs={12}>
             <Autocomplete
               freeSolo
@@ -86,14 +118,19 @@ function PurchaseRequestForm() {
                 setFormData({ ...formData, department: value });
                 fetchDepartments(value);
               }}
-              sx={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField {...params} label="Department" required fullWidth />
               )}
             />
           </Grid>
 
-          {/* Material with Autocomplete */}
+          <Divider flexItem sx={{ my: 2, width: "100%" }} />
+
+          {/* Section 2: Order Details */}
+          <Grid item xs={12}>
+            <Typography variant="h6">Order Details</Typography>
+          </Grid>
+
           <Grid item xs={12}>
             <Autocomplete
               freeSolo
@@ -109,7 +146,6 @@ function PurchaseRequestForm() {
             />
           </Grid>
 
-          {/* Quantity */}
           <Grid item xs={12}>
             <TextField
               type="number"
@@ -120,28 +156,21 @@ function PurchaseRequestForm() {
                 setFormData({ ...formData, quantity: e.target.value })
               }
               required
+              inputProps={{ min: 1 }}
             />
           </Grid>
-          {/* Buttons */}
-          <Grid item xs={12} display="flex" justifyContent="flex-end" gap={2}>
+          {/* Action Buttons */}
+          <Grid item xs={12} display="flex" justifyContent="space-between">
             <Button
               type="button"
               variant="outlined"
               color="secondary"
-              onClick={() =>
-                setFormData({
-                  requesterName: "",
-                  department: "",
-                  material: "",
-                  quantity: "",
-                  justification: "",
-                })
-              }
+              onClick={handleReset}
             >
               Reset
             </Button>
             <Button type="submit" variant="contained" color="primary">
-              Submit
+              Submit Request
             </Button>
           </Grid>
         </Grid>
