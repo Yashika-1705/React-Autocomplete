@@ -101,7 +101,7 @@ function PurchaseRequestForm() {
         <Grid container spacing={3}>
           {/* Section 1: Requester Info */}
           <Grid item xs={12}>
-            <Typography variant="h6">Requester Information</Typography>
+            <Typography variant="h6">Requester Name</Typography>
           </Grid>
 
           <Grid item xs={12}>
@@ -119,7 +119,7 @@ function PurchaseRequestForm() {
 
           <Grid item xs={12}>
             <Grid item xs={12}>
-              <Typography variant="h6">Department</Typography>
+              <Typography variant="h6">Department Name </Typography>
             </Grid>
             <Autocomplete
               freeSolo
@@ -160,6 +160,9 @@ function PurchaseRequestForm() {
           </Grid>
 
           <Grid item xs={12}>
+            <Grid item xs={12}>
+              <Typography variant="h6">Quantity of Item </Typography>
+            </Grid>
             <TextField
               type="number"
               fullWidth
@@ -174,6 +177,10 @@ function PurchaseRequestForm() {
           </Grid>
           {/* Action Buttons */}
           <Grid item xs={12} display="flex" justifyContent="space-between">
+            <Button type="submit" variant="contained" color="primary" sx={{ width: 220}} >
+              Submit Request
+            </Button>
+
             <Button
               type="button"
               variant="outlined"
@@ -181,9 +188,6 @@ function PurchaseRequestForm() {
               onClick={handleReset}
             >
               Reset
-            </Button>
-            <Button type="submit" variant="contained" color="primary">
-              Submit Request
             </Button>
           </Grid>
         </Grid>
