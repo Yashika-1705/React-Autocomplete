@@ -1,8 +1,9 @@
 body {
     background: #ffffff;
+    margin: 0;
     text-align: center;
 }
-.App {
+/* .App {
     background-color: #a7a488;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(7, 88, 102, 0.2);
@@ -12,7 +13,7 @@ body {
     text-align: center;
     margin: auto;
     margin-top: 20px;
-}
+} */
 
 h1 {
     font-size: x-large;

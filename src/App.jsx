@@ -9,6 +9,13 @@ import {
   Paper,
   Divider,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Popper from "@mui/material/Popper";
+
+const CustomPopper = styled(Popper)({
+  width: "auto !important",
+  minWidth: "100%", // ensures at least the width of input
+});
 
 function PurchaseRequestForm() {
   const [formData, setFormData] = useState({
@@ -81,7 +88,7 @@ function PurchaseRequestForm() {
       <Box 
         component="form" 
         sx={{
-          width: "100%",
+
           minHeight: "100vh",
           padding: "2rem",
           display: "flex",
@@ -110,6 +117,9 @@ function PurchaseRequestForm() {
           </Grid>
 
           <Grid item xs={12}>
+            <Grid item xs={12}>
+              <Typography variant="h6">Department</Typography>
+            </Grid>
             <Autocomplete
               freeSolo
               options={departmentOptions}
@@ -119,7 +129,7 @@ function PurchaseRequestForm() {
                 fetchDepartments(value);
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Department" required fullWidth />
+                <TextField {...params} label="Department" required fullWidth sx={{ width: 300}} />
               )}
             />
           </Grid>
@@ -127,11 +137,13 @@ function PurchaseRequestForm() {
           <Divider flexItem sx={{ my: 2, width: "100%" }} />
 
           {/* Section 2: Order Details */}
+          
           <Grid item xs={12}>
-            <Typography variant="h6">Order Details</Typography>
+            <Typography variant="h6">Material Name</Typography>
           </Grid>
 
           <Grid item xs={12}>
+            
             <Autocomplete
               freeSolo
               options={materialOptions}
@@ -141,7 +153,7 @@ function PurchaseRequestForm() {
                 fetchMaterials(value);
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Material Name" required fullWidth />
+                <TextField {...params} label="Material Name" required fullWidth sx={{ width: 300}}/>
               )}
             />
           </Grid>
