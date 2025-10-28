@@ -124,6 +124,7 @@ function PurchaseRequestForm() {
             <Autocomplete
               freeSolo
               options={departmentOptions}
+              filterOptions={(x) => x} 
               inputValue={formData.department}
               onInputChange={(e, value) => {
                 setFormData({ ...formData, department: value });
@@ -148,6 +149,7 @@ function PurchaseRequestForm() {
             <Autocomplete
               freeSolo
               options={materialOptions}
+              filterOptions={(x) => x} 
               inputValue={formData.material}
               onInputChange={(e, value) => {
                 setFormData({ ...formData, material: value });

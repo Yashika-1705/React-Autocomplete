@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS 
 import redis 
+from rapidfuzz import fuzz
+
 
 app = Flask(__name__)
 CORS(app) 
 r = redis.Redis(host="localhost",port=6379, decode_responses=True)
 
 # Mock dataset (could come from Postgres later)
-# later - in memory database
 # materials = [
 #     "SS316L Steel Flange",
 #     "Carbon Steel Pipe",
@@ -27,6 +28,8 @@ r = redis.Redis(host="localhost",port=6379, decode_responses=True)
 #     "Marketing",
 # ]
 
+def fuzzy_filter(items, query, threshold=50):
+    return [i for i in items if fuzz.partial_ratio(query, i.lower()) >= threshold]
 
 # show after 3 char input****
 @app.route("/autocomplete/materials")
@@ -35,7 +38,9 @@ def autocomplete_materials():
     if len(query) <3: # only search after 3+ characters
         return jsonify([])
     materials = r.smembers("materials")
-    matches = [m for m in materials if query in m.lower()]
+    matches = fuzzy_filter(materials, query)
+    # if want result without fuzzy_filter:
+    # matches = [m for m in materials if query in m.lower()]
     return jsonify(matches)
 
 @app.route("/autocomplete/departments")
@@ -44,7 +49,9 @@ def autocomplete_departments():
     if len(query) <3: # only search after 3+ characters
         return jsonify([])
     departments = r.smembers("departments")
-    matches = [d for d in departments if query in d.lower()]
+    matches = fuzzy_filter(departments, query)
+    # if want result without fuzzy_filter:
+    # matches = [d for d in departments if query in d.lower()]
     return jsonify(matches)
 
 if __name__ == "__main__":
